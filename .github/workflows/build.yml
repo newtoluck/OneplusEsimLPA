@@ -1,0 +1,25 @@
+name: Build magisk module
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Download latest android.hardware.telephony.euicc
+        run: |
+          mkdir -p module/system/system_ext/priv-app/EuiccGoogle
+          wget 'https://d.apkpure.com/b/APK/com.google.android.euicc?version=latest' -O module/system/system_ext/priv-app/EuiccGoogle/EuiccGoogle.apk
+      - name: Upload artifact for deployment job
+        uses: actions/upload-artifact@v4
+        with:
+          name: Oneplus11EsimLPA
+          path: module
