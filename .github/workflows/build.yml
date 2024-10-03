@@ -14,10 +14,15 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - name: Download latest android.hardware.telephony.euicc
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+      - name: Download latest apk from apkmirror
         run: |
+          npm install
+          node download-apk.js
           mkdir -p module/system/system_ext/priv-app/EuiccGoogle
-          wget 'https://d.apkpure.com/b/APK/com.google.android.euicc?version=latest' -O module/system/system_ext/priv-app/EuiccGoogle/EuiccGoogle.apk
+          mv EuiccGoogle.apk module/system/system_ext/priv-app/EuiccGoogle/
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:

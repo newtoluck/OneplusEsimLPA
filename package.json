@@ -1,0 +1,15 @@
+{
+    "name": "apkmd",
+    "version": "1.0.0",
+    "type": "module",
+    "main": "download-apk.js",
+    "scripts": {
+        "test": "echo \"Error: no test specified\" && exit 1"
+    },
+    "author": "",
+    "license": "ISC",
+    "description": "",
+    "dependencies": {
+        "apkmirror-downloader": "^2.0.5"
+    }
+}
