@@ -21,8 +21,8 @@ jobs:
         run: |
           npm install
           node download-apk.js
-          mkdir -p module/system/system_ext/priv-app/EuiccGoogle
-          mv EuiccGoogle.apk module/system/system_ext/priv-app/EuiccGoogle/
+          mkdir -p module/system/my_product/priv-app/EuiccGoogle
+          mv EuiccGoogle.apk module/system/my_product/priv-app/EuiccGoogle/
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
