@@ -1,0 +1,6 @@
+id=op11_esim
+name=SIMManager
+version=0.1.0
+versionCode=1
+author=qnnnnez
+description=Add eSIM manager functionalities for OnePlus 11 running ColorOS.
