@@ -14,15 +14,24 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
         with:
           node-version: 20
-      - name: Download latest apk from apkmirror
+      - name: Setup Gradle
+        uses: gradle/actions/setup-gradle@v3
+      - name: Download latest google lpa apk from apkmirror
         run: |
           npm install
           node download-apk.js
-          mkdir -p module/system/my_bigball/priv-app/EuiccGoogle
-          mv EuiccGoogle.apk module/system/my_bigball/priv-app/EuiccGoogle/
+          mkdir -p module/system/system_ext/priv-app/EuiccGoogle
+          mv EuiccGoogle.apk module/system/system_ext/priv-app/EuiccGoogle/
+      - name: Build OplusEuicc.apk
+        run: |
+          cd ./OplusEuicc
+          ./gradlew build
+          mkdir -p module/system/system_ext/priv-app/OplusEuicc/
+          mv ./app/build/outputs/apk/debug/app-debug.apk module/system/system_ext/priv-app/OplusEuicc/
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v4
         with:
